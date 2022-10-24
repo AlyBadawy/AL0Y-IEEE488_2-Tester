@@ -11,60 +11,55 @@ namespace AL0Y_IEEE488_2_Tester
 {
     internal class IEEE488Bus
     {
-        internal static string read(string busAddress)
+
+        internal static IMessageBasedSession initializeInstrument()
         {
             IMessageBasedSession instrument;
-
+            string busAddress = Properties.Settings.Default.busAddress;
             string resourceName = "GPIB0::" + busAddress + "::INSTR";
+            instrument = GlobalResourceManager.Open(resourceName) as IMessageBasedSession;
+            return instrument;
+        }
+
+        internal static string read()
+        {
+            IMessageBasedSession instrument = initializeInstrument();
             string responseString = "";
             string currentByte;
             bool terminateReading;
 
-            try
+            do
             {
-                instrument = GlobalResourceManager.Open(resourceName) as IMessageBasedSession;
+                currentByte = instrument.RawIO.ReadString(1);
+                byte[] bytes = Encoding.UTF8.GetBytes(currentByte);
+                var hexString = BitConverter.ToString(bytes);
 
-                do
+                terminateReading = hexString == "0D";
+                if (terminateReading)
                 {
-                    currentByte = instrument.RawIO.ReadString(1);
-                    byte[] bytes = Encoding.UTF8.GetBytes(currentByte);
-                    var hexString = BitConverter.ToString(bytes);
+                    instrument.RawIO.ReadString(1);
+                }
+                else
+                {
+                    responseString += currentByte;
+                }
 
-                    terminateReading = hexString == "0D";
-                    if (terminateReading)
-                    {
-                        instrument.RawIO.ReadString(1);
-                    }
-                    else
-                    {
-                        responseString += currentByte;
-                    }
+            } while (!terminateReading);
 
-                } while (!terminateReading);
-            }
-            catch
-            {
-                return "";
-            }
             return responseString;
         }
 
-        internal static string write(string busAddress, string command)
+        internal static void write(string command)
         {
-            IMessageBasedSession instrument;
-            string response = "";
-
-            string resourceName = "GPIB0::" + busAddress + "::INSTR";
-            try
-            {
-                instrument = GlobalResourceManager.Open(resourceName) as IMessageBasedSession;
-                instrument.RawIO.Write(command);
-            }
-            catch (Exception exp)
-            {
-                response = exp.Message;
-            }
-            return response;
+            IMessageBasedSession instrument = initializeInstrument();
+            instrument.RawIO.Write(command);
         }
-    }   
+
+        internal static string fetch(string command)
+        {
+            write(command);
+            return read();
+
+        }
+    }
 }

@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.endBitBtn = new System.Windows.Forms.Button();
+            this.runTestBtn = new System.Windows.Forms.Button();
+            this.endTestBtn = new System.Windows.Forms.Button();
+            this.resetBtn = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -69,7 +70,7 @@
             this.label33 = new System.Windows.Forms.Label();
             this.rangeRateLabel = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
-            this.rangelLabel = new System.Windows.Forms.Label();
+            this.rangeLabel = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.b135ModLabel = new System.Windows.Forms.Label();
@@ -91,52 +92,54 @@
             this.label59 = new System.Windows.Forms.Label();
             this.mrbStatusLabel = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
+            this.testTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // button1
+            // endBitBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 46);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.endBitBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
+            this.endBitBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.endBitBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.endBitBtn.Location = new System.Drawing.Point(12, 12);
+            this.endBitBtn.Name = "endBitBtn";
+            this.endBitBtn.Size = new System.Drawing.Size(125, 46);
+            this.endBitBtn.TabIndex = 0;
+            this.endBitBtn.Text = "End BIT";
+            this.endBitBtn.UseVisualStyleBackColor = false;
+            this.endBitBtn.Click += new System.EventHandler(this.endBitBtn_Click);
             // 
-            // button2
+            // runTestBtn
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
-            this.button2.Location = new System.Drawing.Point(160, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 46);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.runTestBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
+            this.runTestBtn.Location = new System.Drawing.Point(160, 12);
+            this.runTestBtn.Name = "runTestBtn";
+            this.runTestBtn.Size = new System.Drawing.Size(125, 46);
+            this.runTestBtn.TabIndex = 1;
+            this.runTestBtn.Text = "Run Test";
+            this.runTestBtn.UseVisualStyleBackColor = false;
+            this.runTestBtn.Click += new System.EventHandler(this.runTestBtn_Click);
             // 
-            // button3
+            // endTestBtn
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
-            this.button3.Location = new System.Drawing.Point(308, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(125, 46);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.endTestBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
+            this.endTestBtn.Location = new System.Drawing.Point(308, 12);
+            this.endTestBtn.Name = "endTestBtn";
+            this.endTestBtn.Size = new System.Drawing.Size(125, 46);
+            this.endTestBtn.TabIndex = 2;
+            this.endTestBtn.Text = "Stop Test";
+            this.endTestBtn.UseVisualStyleBackColor = false;
+            this.endTestBtn.Click += new System.EventHandler(this.endTestBtn_Click);
             // 
-            // button4
+            // resetBtn
             // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
-            this.button4.Location = new System.Drawing.Point(456, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(125, 46);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = false;
+            this.resetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
+            this.resetBtn.Location = new System.Drawing.Point(456, 12);
+            this.resetBtn.Name = "resetBtn";
+            this.resetBtn.Size = new System.Drawing.Size(125, 46);
+            this.resetBtn.TabIndex = 3;
+            this.resetBtn.Text = "Reset Instrument";
+            this.resetBtn.UseVisualStyleBackColor = false;
+            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
             // 
             // exitButton
             // 
@@ -527,15 +530,15 @@
             this.label35.TabIndex = 38;
             this.label35.Text = "Range Rate (Knots):";
             // 
-            // rangelLabel
+            // rangeLabel
             // 
-            this.rangelLabel.AutoSize = true;
-            this.rangelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rangelLabel.Location = new System.Drawing.Point(541, 153);
-            this.rangelLabel.Name = "rangelLabel";
-            this.rangelLabel.Size = new System.Drawing.Size(19, 16);
-            this.rangelLabel.TabIndex = 37;
-            this.rangelLabel.Text = "...";
+            this.rangeLabel.AutoSize = true;
+            this.rangeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rangeLabel.Location = new System.Drawing.Point(541, 153);
+            this.rangeLabel.Name = "rangeLabel";
+            this.rangeLabel.Size = new System.Drawing.Size(19, 16);
+            this.rangeLabel.TabIndex = 37;
+            this.rangeLabel.Text = "...";
             // 
             // label37
             // 
@@ -645,7 +648,6 @@
             this.label48.Size = new System.Drawing.Size(160, 16);
             this.label48.TabIndex = 51;
             this.label48.Text = "Bearing Rate (Deg/S):";
-            this.label48.Click += new System.EventHandler(this.label48_Click);
             // 
             // bearingLabel
             // 
@@ -766,12 +768,18 @@
             this.label61.TabIndex = 59;
             this.label61.Text = "MRB Status:";
             // 
+            // testTimer
+            // 
+            this.testTimer.Interval = 500;
+            this.testTimer.Tick += new System.EventHandler(this.testTimer_Tick);
+            // 
             // mainForm
             // 
+            this.AcceptButton = this.endBitBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(82)))), ((int)(((byte)(84)))));
-            this.ClientSize = new System.Drawing.Size(744, 611);
+            this.ClientSize = new System.Drawing.Size(744, 497);
             this.ControlBox = false;
             this.Controls.Add(this.activeStepLabel);
             this.Controls.Add(this.label55);
@@ -800,7 +808,7 @@
             this.Controls.Add(this.label33);
             this.Controls.Add(this.rangeRateLabel);
             this.Controls.Add(this.label35);
-            this.Controls.Add(this.rangelLabel);
+            this.Controls.Add(this.rangeLabel);
             this.Controls.Add(this.label37);
             this.Controls.Add(this.label40);
             this.Controls.Add(this.prfLabel);
@@ -831,10 +839,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exitButton);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.resetBtn);
+            this.Controls.Add(this.endTestBtn);
+            this.Controls.Add(this.runTestBtn);
+            this.Controls.Add(this.endBitBtn);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -848,10 +856,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button endBitBtn;
+        private System.Windows.Forms.Button runTestBtn;
+        private System.Windows.Forms.Button endTestBtn;
+        private System.Windows.Forms.Button resetBtn;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -888,7 +896,7 @@
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label rangeRateLabel;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label rangelLabel;
+        private System.Windows.Forms.Label rangeLabel;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label b135ModLabel;
@@ -910,6 +918,7 @@
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.Label mrbStatusLabel;
         private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Timer testTimer;
     }
 }
 
