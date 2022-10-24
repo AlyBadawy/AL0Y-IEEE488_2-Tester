@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ivi.Visa;
@@ -23,6 +24,8 @@ namespace AL0Y_IEEE488_2_Tester
 
         internal static string read()
         {
+            Thread.Sleep(Properties.Settings.Default.waitBeforeRead);
+
             IMessageBasedSession instrument = initializeInstrument();
             string responseString = "";
             string currentByte;
@@ -43,6 +46,10 @@ namespace AL0Y_IEEE488_2_Tester
                 {
                     responseString += currentByte;
                 }
+                if (responseString.Length > Properties.Settings.Default.maxResponseSize)
+                {
+                    terminateReading = true;
+                }
 
             } while (!terminateReading);
 
@@ -51,6 +58,7 @@ namespace AL0Y_IEEE488_2_Tester
 
         internal static void write(string command)
         {
+            Thread.Sleep(Properties.Settings.Default.waitBeforeWrite);
             IMessageBasedSession instrument = initializeInstrument();
             instrument.RawIO.Write(command);
         }
@@ -59,7 +67,6 @@ namespace AL0Y_IEEE488_2_Tester
         {
             write(command);
             return read();
-
         }
     }
 }

@@ -31,5 +31,32 @@ namespace AL0Y_IEEE488_2_Tester.Properties {
                 return ((string)(this["busAddress"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int waitBeforeWrite {
+            get {
+                return ((int)(this["waitBeforeWrite"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int waitBeforeRead {
+            get {
+                return ((int)(this["waitBeforeRead"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1020")]
+        public int maxResponseSize {
+            get {
+                return ((int)(this["maxResponseSize"]));
+            }
+        }
     }
 }

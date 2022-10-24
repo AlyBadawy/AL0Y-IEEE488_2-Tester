@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
-using Timer = System.Windows.Forms.Timer;
 
 namespace AL0Y_IEEE488_2_Tester
 {
     public partial class mainForm : Form
     {
+        int testStep = 0;
         public mainForm()
         {
             InitializeComponent();
@@ -25,29 +17,51 @@ namespace AL0Y_IEEE488_2_Tester
             try
             {
                 IEEE488Bus.write("BITDME:CH0");
-                Thread.Sleep(500);
+                Thread.Sleep(2000);
                 getInitialData();
-                Enabled = false;
             }
             catch (Exception ex)
             {
-                Enabled = true;
                 handleError(ex);
             }
         }
 
         private void runTestBtn_Click(object sender, EventArgs e)
         {
-            // TODO: Writeb command to change range and bearing rates
-            testTimer.Start();
-            testTimer.Enabled = true;
+            try
+            {
+                progresTimer.Start();
+                progresTimer.Enabled = true;
+                progressBar.Visible = true;
+                IEEE488Bus.write("SETBRRT500  ");
+                IEEE488Bus.write("SETTGTR5  ");
+                testTimer.Start();
+                testTimer.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+                handleError(ex);
+            }
         }
 
         private void endTestBtn_Click(object sender, EventArgs e)
         {
-            // TODO: Write command to change range and bearing rates to 0.
-            testTimer.Stop();
-            testTimer.Enabled = false;
+            try
+            {
+                IEEE488Bus.write("SETBRRT500  ");
+                IEEE488Bus.write("SETTGTR1  ");
+                testTimer.Stop();
+                testTimer.Enabled = false;
+                progresTimer.Stop();
+                progresTimer.Enabled = false;
+                progressBar.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                handleError(ex);
+            }
+
         }
 
         private void resetBtn_Click(object sender, EventArgs e)
@@ -72,23 +86,26 @@ namespace AL0Y_IEEE488_2_Tester
 
 
 
-
-
-
-
-
-
-
-        private void testTimer_Tick(object sender, EventArgs e)
+        internal void testTimer_Tick(object sender, EventArgs e)
         {
             try
             {
-
+                getRepeatingData();
             }
             catch (Exception ex)
             {
                 handleError(ex);
             }
+        }
+
+
+
+        internal void getRepeatingData()
+        {
+            rangeLabel.Text = IEEE488Bus.fetch("FTHTGTD");
+            rangeRateLabel.Text = IEEE488Bus.fetch("FTHTGTR");
+            bearingLabel.Text = IEEE488Bus.fetch("FTHBRNG");
+            bearingRateLabel.Text = IEEE488Bus.fetch("FTHBRRT");
         }
 
         internal void getInitialData()
@@ -132,10 +149,93 @@ namespace AL0Y_IEEE488_2_Tester
 
         internal void handleError(Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error communicating with Instrument!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             testTimer.Stop();
             testTimer.Enabled = false;
+            progressBar.Visible = false;
+            progresTimer.Stop();
+            progresTimer.Enabled = false;
+            responseLabel.Text = $"Error: {ex.Message}";
 
+        }
+
+        private void mainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           if (e.KeyChar == ' ')
+            {
+                switch (testStep)
+                {
+                    case 0:
+                        endBitBtn.PerformClick();
+                        testStepStatus.Text = "Press SPACE to start test";
+                        break;
+                    case 1:
+                        runTestBtn.PerformClick();
+                        testStepStatus.Text = "Press SPACE to end test";
+                        break;
+                    case 2:
+                        endTestBtn.PerformClick();
+                        testStepStatus.Text = "Press SPACE to reset instrument";
+                        break;
+                    case 3:
+                        resetBtn.PerformClick();
+                        testStepStatus.Text = "Press SPACE to exit BIT mode";
+                        break;
+                    default:
+                        break;
+                }
+                testStep++;
+                if (testStep >= 4)
+                {
+                    testStep = 0;
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void commandTextBox_TextChanged(object sender, EventArgs e)
+        {
+            sendBtn.Enabled = Text.Length != 0;
+        }
+
+        private void commandTextBox_Enter(object sender, EventArgs e)
+        {
+            KeyPreview = false;
+
+        }
+
+        private void commandTextBox_Leave(object sender, EventArgs e)
+        {
+            KeyPreview = true;
+        }
+
+        private void sendBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                responseLabel.Text = IEEE488Bus.fetch(commandTextBox.Text.ToUpper());
+            } 
+            catch (Exception ex)
+            {
+                responseLabel.Text = $"Error: {ex.Message}";
+            }
+        }
+
+        private void progresTimer_Tick(object sender, EventArgs e)
+        {
+            progressBar.Value += 20;
+            if (progressBar.Value > 100)
+            {
+                progressBar.Value = 0;
+            }
         }
     }
 }
