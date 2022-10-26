@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using alyBadawy;
 
 namespace AL0Y_IEEE488_2_Tester
 {
@@ -20,7 +21,7 @@ namespace AL0Y_IEEE488_2_Tester
             {
                 IEEE488Bus.write("BITDME:CH0");
                 responseLabel.Text = "(2/4) Resetting buffer";
-                IEEE488Bus.readTillBufferEnd();
+                IEEE488Bus.clearBuffer();
                 Thread.Sleep(2000);
                 responseLabel.Text = "(3/4) Getting instrument Type";
                 instType = IEEE488Bus.fetch("GETCFG ");
@@ -82,7 +83,7 @@ namespace AL0Y_IEEE488_2_Tester
             try
             {
                 IEEE488Bus.write("RSTDME:CH0");
-                IEEE488Bus.readTillBufferEnd();
+                IEEE488Bus.clearBuffer();
                 endBitBtn.Enabled = true;
                 responseLabel.Text = "Ready...";
             }

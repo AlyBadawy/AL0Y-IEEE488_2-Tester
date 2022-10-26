@@ -7,7 +7,7 @@
     <ProjectGuid>{C1E70D97-5743-4719-95AD-CCF6D782333E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>AL0Y_IEEE488_2_Tester</RootNamespace>
-    <AssemblyName>AL0Y 488.2Tester</AssemblyName>
+    <AssemblyName>AL0Y 4882 Tester</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -26,7 +26,7 @@
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <DisallowUrlActivation>true</DisallowUrlActivation>
     <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>1.0.3.%2a</ApplicationVersion>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -77,6 +77,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="alyBadawy, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\alyBadawy\bin\Debug\net6.0\alyBadawy.dll</HintPath>
+    </Reference>
     <Reference Include="Ivi.Visa, Version=5.11.0.0, Culture=neutral, PublicKeyToken=a128c98f1d7717c1, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -91,7 +94,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HexParser.cs" />
     <Compile Include="IEEE488Bus.cs" />
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>

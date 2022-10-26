@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ivi.Visa;
+using alyBadawy;
+
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AL0Y_IEEE488_2_Tester
@@ -19,6 +21,9 @@ namespace AL0Y_IEEE488_2_Tester
             string busAddress = Properties.Settings.Default.busAddress;
             string resourceName = "GPIB0::" + busAddress + "::INSTR";
             instrument = GlobalResourceManager.Open(resourceName) as IMessageBasedSession;
+            instrument.TimeoutMilliseconds = 25;
+            instrument.TerminationCharacter = alyBadawy.HexParser.StringToByteArray("0A")[0];
+            instrument.TerminationCharacterEnabled = true;
             return instrument;
         }
 
@@ -34,7 +39,7 @@ namespace AL0Y_IEEE488_2_Tester
             do
             {
                 currentByte = instrument.RawIO.ReadString(1);
-                var hexString = HexParser.parse(currentByte);
+                var hexString =  HexParser.parse(currentByte);
 
                 terminateReading = (hexString == "0D" || responseString.Length > Properties.Settings.Default.maxResponseSize);
                 if (terminateReading)
@@ -72,17 +77,32 @@ namespace AL0Y_IEEE488_2_Tester
                 return responseString;
             }
         }
-            internal static void write(string command)
-            {
-                Thread.Sleep(Properties.Settings.Default.waitBeforeWrite);
-                IMessageBasedSession instrument = initializeInstrument();
-                instrument.RawIO.Write(command);
-            }
 
-            internal static string fetch(string command)
-            {
-                write(command);
-                return read();
-            }
+        internal static string readTillTerminator()
+        {
+            Thread.Sleep(Properties.Settings.Default.waitBeforeRead);
+
+            IMessageBasedSession instrument = initializeInstrument();
+            return instrument.RawIO.ReadString();
+        }
+
+        internal static void clearBuffer()
+        {
+            readTillTerminator();
+            //readTillBufferEnd();
+        }
+
+        internal static void write(string command)
+        {
+            Thread.Sleep(Properties.Settings.Default.waitBeforeWrite);
+            IMessageBasedSession instrument = initializeInstrument();
+            instrument.RawIO.Write(command);
+        }
+
+        internal static string fetch(string command)
+        {
+            write(command);
+            return read();
         }
     }
+}
