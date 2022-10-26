@@ -7,6 +7,7 @@ namespace AL0Y_IEEE488_2_Tester
     public partial class mainForm : Form
     {
         int testStep = 0;
+        string instType;
         public mainForm()
         {
             InitializeComponent();
@@ -14,11 +15,22 @@ namespace AL0Y_IEEE488_2_Tester
 
         private void endBitBtn_Click(object sender, EventArgs e)
         {
+            responseLabel.Text = "(1/4) Ending BIT mode...";
             try
             {
                 IEEE488Bus.write("BITDME:CH0");
+                responseLabel.Text = "(2/4) Resetting buffer";
+                IEEE488Bus.readTillBufferEnd();
                 Thread.Sleep(2000);
+                responseLabel.Text = "(3/4) Getting instrument Type";
+                instType = IEEE488Bus.fetch("GETCFG ");
+                instrumentTypeLabel.Text = instType;
+                responseHexLabel.Text = HexParser.parse(instType);
+                Thread.Sleep(2000);
+                responseLabel.Text = "(3/4) Getting initial data...";
                 getInitialData();
+                responseLabel.Text = "Ready...";
+                runTestBtn.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -30,14 +42,13 @@ namespace AL0Y_IEEE488_2_Tester
         {
             try
             {
+                progressBar.Visible = true;
                 progresTimer.Start();
                 progresTimer.Enabled = true;
-                progressBar.Visible = true;
                 IEEE488Bus.write("SETBRRT500  ");
                 IEEE488Bus.write("SETTGTR5  ");
                 testTimer.Start();
                 testTimer.Enabled = true;
-
             }
             catch (Exception ex)
             {
@@ -71,20 +82,15 @@ namespace AL0Y_IEEE488_2_Tester
             try
             {
                 IEEE488Bus.write("RSTDME:CH0");
+                IEEE488Bus.readTillBufferEnd();
                 endBitBtn.Enabled = true;
+                responseLabel.Text = "Ready...";
             }
             catch (Exception ex)
             {
                 handleError(ex);
             }
         }
-
-        private void exitButton_Click(object sender, EventArgs e)
-        {
-            System.Windows.Forms.Application.Exit();
-        }
-
-
 
         internal void testTimer_Tick(object sender, EventArgs e)
         {
@@ -110,41 +116,79 @@ namespace AL0Y_IEEE488_2_Tester
 
         internal void getInitialData()
         {
-            // DTS Mode Data
-            // // Missing command for Mode
-            // // missing command for inverse
+            //// DTS Mode Data
+            // Missing command for Mode (check FTHPDME
+            modeLabel.Text = "Normal";
+
+            // Missing command for inverse
+            inverseLabel.Text = "No";
+
             idToneLabel.Text = IEEE488Bus.fetch("FTHIDTN");
-            channleLabel.Text = IEEE488Bus.fetch("FTHCHNL");
+            if (idToneLabel.Text == "O") idToneLabel.Text = "On";
+            if (idToneLabel.Text == "F") idToneLabel.Text = "Off";
+
+            string channel = IEEE488Bus.fetch("FTHCHNL");
+            string mode = IEEE488Bus.fetch("FTHXYMD");
+            channleLabel.Text = $"{channel}({mode})";
+
             freqLabel.Text = IEEE488Bus.fetch("FTHFREQ");
+
             presetStatusLabel.Text = IEEE488Bus.fetch("FTHPRST");
+            if (presetStatusLabel.Text == "Y") presetStatusLabel.Text = "Yes";
+            if (presetStatusLabel.Text == "N") presetStatusLabel.Text = "No";
 
-            // RF Data
+            //// RF Data
             rfLevelLabel.Text = IEEE488Bus.fetch("FTHRFLV");
-            rfPulseLabel.Text = IEEE488Bus.fetch("FTHRFOT");
 
-            // UUT Data
+            rfPulseLabel.Text = IEEE488Bus.fetch("FTHRFOT");
+            if (rfPulseLabel.Text == "C") rfPulseLabel.Text = "CW";
+            if (rfPulseLabel.Text == "P") rfPulseLabel.Text = "Pulse";
+
+            //// UUT Data
             peakPowerLabel.Text = IEEE488Bus.fetch("FTHPWER");
+
             aaReplyEffLabel1.Text = IEEE488Bus.fetch("FTHUUTR");
-            // // missing command for A/A Reply EFF. (%)
+
+            // Missing command for A/A Reply EFF. (%)
+
             prfLabel.Text = IEEE488Bus.fetch("FTHUUTP");
 
-            // Range Data
+            //// Range Data
             rangeLabel.Text = IEEE488Bus.fetch("FTHTGTD");
             rangeRateLabel.Text = IEEE488Bus.fetch("FTHTGTR");
-            // // A/A Int Rate
+
+            // Missig command for A/A Int Rate
             replyEffLabel.Text = IEEE488Bus.fetch("FTHRPLE");
+
             pulseSpacingLabel.Text = IEEE488Bus.fetch("FTHPLSP");
 
             // Bearing Data
             bearingLabel.Text = IEEE488Bus.fetch("FTHBRNG");
+
             bearingRateLabel.Text = IEEE488Bus.fetch("FTHBRRT");
+
             b15PaseLabel.Text = IEEE488Bus.fetch("FTHPHSE");
             b15ModLabel.Text = IEEE488Bus.fetch("FTHMD15");
             b135ModLabel.Text = IEEE488Bus.fetch("FTHM135");
             mrbStatusLabel.Text = IEEE488Bus.fetch("FTHMRBS");
             arbStatusLabel.Text = IEEE488Bus.fetch("FTHARBS");
             squitterRateLabel.Text = IEEE488Bus.fetch("FTHSQTR");
-            // // Missing command for Active Step Size.
+            // Missing command for Active Step Size.
+
+
+            // Flight Inspection Unit
+            if (instType == "F")
+            {
+                rfPortLabel.Text = IEEE488Bus.fetch("FTHRFSW");
+                antennaSpdLabel.Text = IEEE488Bus.fetch("FTHANTS");
+                mrbDeviationLabel.Text = IEEE488Bus.fetch("FTHMRBF");
+                mrbSpacingDevLabel.Text = IEEE488Bus.fetch("FTHMRPS");
+                arbCountLabel.Text = IEEE488Bus.fetch("FTHARBC");
+                arbSizeLabel.Text = IEEE488Bus.fetch("FTHARBF");
+                intExtBurstLabel.Text = IEEE488Bus.fetch("FTHBRST");
+                if (intExtBurstLabel.Text == "I") intExtBurstLabel.Text = "Int.";
+                if (intExtBurstLabel.Text == "E") intExtBurstLabel.Text = "Ext.";
+            }
         }
 
         internal void handleError(Exception ex)
@@ -160,7 +204,7 @@ namespace AL0Y_IEEE488_2_Tester
 
         private void mainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-           if (e.KeyChar == ' ')
+            if (e.KeyChar == ' ')
             {
                 switch (testStep)
                 {
@@ -191,16 +235,6 @@ namespace AL0Y_IEEE488_2_Tester
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void commandTextBox_TextChanged(object sender, EventArgs e)
         {
             sendBtn.Enabled = Text.Length != 0;
@@ -221,8 +255,10 @@ namespace AL0Y_IEEE488_2_Tester
         {
             try
             {
-                responseLabel.Text = IEEE488Bus.fetch(commandTextBox.Text.ToUpper());
-            } 
+                string response = IEEE488Bus.fetch(commandTextBox.Text.ToUpper());
+                responseLabel.Text = response;
+                responseHexLabel.Text = HexParser.parse(response);
+            }
             catch (Exception ex)
             {
                 responseLabel.Text = $"Error: {ex.Message}";
@@ -236,6 +272,11 @@ namespace AL0Y_IEEE488_2_Tester
             {
                 progressBar.Value = 0;
             }
+        }
+
+        private void mainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

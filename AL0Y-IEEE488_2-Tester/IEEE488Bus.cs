@@ -34,10 +34,9 @@ namespace AL0Y_IEEE488_2_Tester
             do
             {
                 currentByte = instrument.RawIO.ReadString(1);
-                byte[] bytes = Encoding.UTF8.GetBytes(currentByte);
-                var hexString = BitConverter.ToString(bytes);
+                var hexString = HexParser.parse(currentByte);
 
-                terminateReading = hexString == "0D";
+                terminateReading = (hexString == "0D" || responseString.Length > Properties.Settings.Default.maxResponseSize);
                 if (terminateReading)
                 {
                     instrument.RawIO.ReadString(1);
@@ -46,27 +45,44 @@ namespace AL0Y_IEEE488_2_Tester
                 {
                     responseString += currentByte;
                 }
-                if (responseString.Length > Properties.Settings.Default.maxResponseSize)
-                {
-                    terminateReading = true;
-                }
 
             } while (!terminateReading);
 
             return responseString;
         }
 
-        internal static void write(string command)
+        internal static string readTillBufferEnd()
         {
-            Thread.Sleep(Properties.Settings.Default.waitBeforeWrite);
-            IMessageBasedSession instrument = initializeInstrument();
-            instrument.RawIO.Write(command);
-        }
+            Thread.Sleep(Properties.Settings.Default.waitBeforeRead);
 
-        internal static string fetch(string command)
-        {
-            write(command);
-            return read();
+            IMessageBasedSession instrument = initializeInstrument();
+            string responseString = "";
+            string currentByte;
+            try
+            {
+                while (true)
+                {
+                    currentByte = instrument.RawIO.ReadString(1);
+                    responseString += currentByte;
+
+                }
+            }
+            catch (Ivi.Visa.IOTimeoutException)
+            {
+                return responseString;
+            }
+        }
+            internal static void write(string command)
+            {
+                Thread.Sleep(Properties.Settings.Default.waitBeforeWrite);
+                IMessageBasedSession instrument = initializeInstrument();
+                instrument.RawIO.Write(command);
+            }
+
+            internal static string fetch(string command)
+            {
+                write(command);
+                return read();
+            }
         }
     }
-}

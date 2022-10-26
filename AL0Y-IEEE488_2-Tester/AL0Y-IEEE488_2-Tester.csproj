@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HexParser.cs" />
     <Compile Include="IEEE488Bus.cs" />
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>

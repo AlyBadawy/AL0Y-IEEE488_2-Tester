@@ -99,6 +99,23 @@
             this.testStepStatus = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.progresTimer = new System.Windows.Forms.Timer(this.components);
+            this.intExtBurstLabel = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.arbCountLabel = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.antennaSpdLabel = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.responseHexLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.instrumentTypeLabel = new System.Windows.Forms.Label();
+            this.arbSizeLabel = new System.Windows.Forms.Label();
+            this.arbSize = new System.Windows.Forms.Label();
+            this.mrbDeviationLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.mrbSpacingDevLabel = new System.Windows.Forms.Label();
+            this.mrbSpacingDev = new System.Windows.Forms.Label();
+            this.rfPortLabel = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // endBitBtn
@@ -178,9 +195,9 @@
             this.modeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.modeLabel.Location = new System.Drawing.Point(342, 50);
             this.modeLabel.Name = "modeLabel";
-            this.modeLabel.Size = new System.Drawing.Size(57, 16);
+            this.modeLabel.Size = new System.Drawing.Size(19, 16);
             this.modeLabel.TabIndex = 8;
-            this.modeLabel.Text = "Normal";
+            this.modeLabel.Text = "...";
             // 
             // inverseLabel
             // 
@@ -305,7 +322,7 @@
             // 
             this.rfLevelLabel.AutoSize = true;
             this.rfLevelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rfLevelLabel.Location = new System.Drawing.Point(342, 189);
+            this.rfLevelLabel.Location = new System.Drawing.Point(342, 207);
             this.rfLevelLabel.Name = "rfLevelLabel";
             this.rfLevelLabel.Size = new System.Drawing.Size(19, 16);
             this.rfLevelLabel.TabIndex = 21;
@@ -316,7 +333,7 @@
             this.label16.AutoSize = true;
             this.label16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(182, 189);
+            this.label16.Location = new System.Drawing.Point(182, 207);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(118, 16);
             this.label16.TabIndex = 20;
@@ -326,7 +343,7 @@
             // 
             this.rfPulseLabel.AutoSize = true;
             this.rfPulseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rfPulseLabel.Location = new System.Drawing.Point(342, 207);
+            this.rfPulseLabel.Location = new System.Drawing.Point(342, 225);
             this.rfPulseLabel.Name = "rfPulseLabel";
             this.rfPulseLabel.Size = new System.Drawing.Size(19, 16);
             this.rfPulseLabel.TabIndex = 23;
@@ -337,7 +354,7 @@
             this.label18.AutoSize = true;
             this.label18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(182, 207);
+            this.label18.Location = new System.Drawing.Point(182, 225);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(99, 16);
             this.label18.TabIndex = 22;
@@ -347,7 +364,7 @@
             // 
             this.aaReplyEffLabel1.AutoSize = true;
             this.aaReplyEffLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aaReplyEffLabel1.Location = new System.Drawing.Point(342, 297);
+            this.aaReplyEffLabel1.Location = new System.Drawing.Point(342, 309);
             this.aaReplyEffLabel1.Name = "aaReplyEffLabel1";
             this.aaReplyEffLabel1.Size = new System.Drawing.Size(19, 16);
             this.aaReplyEffLabel1.TabIndex = 28;
@@ -358,7 +375,7 @@
             this.label20.AutoSize = true;
             this.label20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(182, 297);
+            this.label20.Location = new System.Drawing.Point(182, 309);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(145, 16);
             this.label20.TabIndex = 27;
@@ -368,7 +385,7 @@
             // 
             this.peakPowerLabel.AutoSize = true;
             this.peakPowerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.peakPowerLabel.Location = new System.Drawing.Point(342, 279);
+            this.peakPowerLabel.Location = new System.Drawing.Point(342, 291);
             this.peakPowerLabel.Name = "peakPowerLabel";
             this.peakPowerLabel.Size = new System.Drawing.Size(19, 16);
             this.peakPowerLabel.TabIndex = 26;
@@ -379,7 +396,7 @@
             this.label22.AutoSize = true;
             this.label22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(182, 279);
+            this.label22.Location = new System.Drawing.Point(182, 291);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(143, 16);
             this.label22.TabIndex = 25;
@@ -391,7 +408,7 @@
             this.label23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(20)))));
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(265, 242);
+            this.label23.Location = new System.Drawing.Point(265, 254);
             this.label23.MinimumSize = new System.Drawing.Size(150, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(150, 24);
@@ -403,7 +420,7 @@
             // 
             this.prfLabel.AutoSize = true;
             this.prfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prfLabel.Location = new System.Drawing.Point(342, 333);
+            this.prfLabel.Location = new System.Drawing.Point(342, 345);
             this.prfLabel.Name = "prfLabel";
             this.prfLabel.Size = new System.Drawing.Size(19, 16);
             this.prfLabel.TabIndex = 32;
@@ -414,7 +431,7 @@
             this.label25.AutoSize = true;
             this.label25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(182, 333);
+            this.label25.Location = new System.Drawing.Point(182, 345);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(90, 16);
             this.label25.TabIndex = 31;
@@ -424,7 +441,7 @@
             // 
             this.aaReplyEffLabel2.AutoSize = true;
             this.aaReplyEffLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aaReplyEffLabel2.Location = new System.Drawing.Point(342, 315);
+            this.aaReplyEffLabel2.Location = new System.Drawing.Point(342, 327);
             this.aaReplyEffLabel2.Name = "aaReplyEffLabel2";
             this.aaReplyEffLabel2.Size = new System.Drawing.Size(19, 16);
             this.aaReplyEffLabel2.TabIndex = 30;
@@ -435,7 +452,7 @@
             this.label27.AutoSize = true;
             this.label27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(182, 315);
+            this.label27.Location = new System.Drawing.Point(182, 327);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(134, 16);
             this.label27.TabIndex = 29;
@@ -564,7 +581,7 @@
             // 
             this.b135ModLabel.AutoSize = true;
             this.b135ModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b135ModLabel.Location = new System.Drawing.Point(698, 261);
+            this.b135ModLabel.Location = new System.Drawing.Point(698, 278);
             this.b135ModLabel.Name = "b135ModLabel";
             this.b135ModLabel.Size = new System.Drawing.Size(19, 16);
             this.b135ModLabel.TabIndex = 58;
@@ -575,7 +592,7 @@
             this.label42.AutoSize = true;
             this.label42.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(538, 261);
+            this.label42.Location = new System.Drawing.Point(538, 278);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(122, 16);
             this.label42.TabIndex = 57;
@@ -585,7 +602,7 @@
             // 
             this.b15ModLabel.AutoSize = true;
             this.b15ModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b15ModLabel.Location = new System.Drawing.Point(698, 243);
+            this.b15ModLabel.Location = new System.Drawing.Point(698, 260);
             this.b15ModLabel.Name = "b15ModLabel";
             this.b15ModLabel.Size = new System.Drawing.Size(19, 16);
             this.b15ModLabel.TabIndex = 56;
@@ -596,7 +613,7 @@
             this.label44.AutoSize = true;
             this.label44.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.Location = new System.Drawing.Point(538, 243);
+            this.label44.Location = new System.Drawing.Point(538, 260);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(114, 16);
             this.label44.TabIndex = 55;
@@ -606,7 +623,7 @@
             // 
             this.b15PaseLabel.AutoSize = true;
             this.b15PaseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b15PaseLabel.Location = new System.Drawing.Point(698, 225);
+            this.b15PaseLabel.Location = new System.Drawing.Point(698, 242);
             this.b15PaseLabel.Name = "b15PaseLabel";
             this.b15PaseLabel.Size = new System.Drawing.Size(19, 16);
             this.b15PaseLabel.TabIndex = 54;
@@ -617,7 +634,7 @@
             this.label46.AutoSize = true;
             this.label46.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label46.Location = new System.Drawing.Point(538, 225);
+            this.label46.Location = new System.Drawing.Point(538, 242);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(140, 16);
             this.label46.TabIndex = 53;
@@ -683,7 +700,7 @@
             // 
             this.activeStepLabel.AutoSize = true;
             this.activeStepLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.activeStepLabel.Location = new System.Drawing.Point(698, 333);
+            this.activeStepLabel.Location = new System.Drawing.Point(698, 433);
             this.activeStepLabel.Name = "activeStepLabel";
             this.activeStepLabel.Size = new System.Drawing.Size(19, 16);
             this.activeStepLabel.TabIndex = 66;
@@ -694,7 +711,7 @@
             this.label55.AutoSize = true;
             this.label55.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label55.Location = new System.Drawing.Point(538, 333);
+            this.label55.Location = new System.Drawing.Point(538, 433);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(124, 16);
             this.label55.TabIndex = 65;
@@ -704,7 +721,7 @@
             // 
             this.squitterRateLabel.AutoSize = true;
             this.squitterRateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.squitterRateLabel.Location = new System.Drawing.Point(698, 315);
+            this.squitterRateLabel.Location = new System.Drawing.Point(698, 415);
             this.squitterRateLabel.Name = "squitterRateLabel";
             this.squitterRateLabel.Size = new System.Drawing.Size(19, 16);
             this.squitterRateLabel.TabIndex = 64;
@@ -715,7 +732,7 @@
             this.label57.AutoSize = true;
             this.label57.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label57.Location = new System.Drawing.Point(538, 315);
+            this.label57.Location = new System.Drawing.Point(538, 415);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(150, 16);
             this.label57.TabIndex = 63;
@@ -725,7 +742,7 @@
             // 
             this.arbStatusLabel.AutoSize = true;
             this.arbStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.arbStatusLabel.Location = new System.Drawing.Point(698, 297);
+            this.arbStatusLabel.Location = new System.Drawing.Point(698, 351);
             this.arbStatusLabel.Name = "arbStatusLabel";
             this.arbStatusLabel.Size = new System.Drawing.Size(19, 16);
             this.arbStatusLabel.TabIndex = 62;
@@ -736,7 +753,7 @@
             this.label59.AutoSize = true;
             this.label59.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label59.Location = new System.Drawing.Point(538, 297);
+            this.label59.Location = new System.Drawing.Point(538, 351);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(89, 16);
             this.label59.TabIndex = 61;
@@ -746,7 +763,7 @@
             // 
             this.mrbStatusLabel.AutoSize = true;
             this.mrbStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mrbStatusLabel.Location = new System.Drawing.Point(698, 279);
+            this.mrbStatusLabel.Location = new System.Drawing.Point(698, 297);
             this.mrbStatusLabel.Name = "mrbStatusLabel";
             this.mrbStatusLabel.Size = new System.Drawing.Size(19, 16);
             this.mrbStatusLabel.TabIndex = 60;
@@ -757,7 +774,7 @@
             this.label61.AutoSize = true;
             this.label61.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label61.Location = new System.Drawing.Point(538, 279);
+            this.label61.Location = new System.Drawing.Point(538, 297);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(91, 16);
             this.label61.TabIndex = 59;
@@ -834,12 +851,203 @@
             this.progresTimer.Interval = 25;
             this.progresTimer.Tick += new System.EventHandler(this.progresTimer_Tick);
             // 
+            // intExtBurstLabel
+            // 
+            this.intExtBurstLabel.AutoSize = true;
+            this.intExtBurstLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.intExtBurstLabel.Location = new System.Drawing.Point(697, 399);
+            this.intExtBurstLabel.Name = "intExtBurstLabel";
+            this.intExtBurstLabel.Size = new System.Drawing.Size(19, 16);
+            this.intExtBurstLabel.TabIndex = 79;
+            this.intExtBurstLabel.Text = "...";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(537, 399);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(92, 16);
+            this.label12.TabIndex = 78;
+            this.label12.Text = "Int/Ext Burst:";
+            // 
+            // arbCountLabel
+            // 
+            this.arbCountLabel.AutoSize = true;
+            this.arbCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.arbCountLabel.Location = new System.Drawing.Point(698, 367);
+            this.arbCountLabel.Name = "arbCountLabel";
+            this.arbCountLabel.Size = new System.Drawing.Size(19, 16);
+            this.arbCountLabel.TabIndex = 77;
+            this.arbCountLabel.Text = "...";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(538, 367);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(85, 16);
+            this.label17.TabIndex = 76;
+            this.label17.Text = "ARB Count:";
+            // 
+            // antennaSpdLabel
+            // 
+            this.antennaSpdLabel.AutoSize = true;
+            this.antennaSpdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.antennaSpdLabel.Location = new System.Drawing.Point(698, 223);
+            this.antennaSpdLabel.Name = "antennaSpdLabel";
+            this.antennaSpdLabel.Size = new System.Drawing.Size(19, 16);
+            this.antennaSpdLabel.TabIndex = 75;
+            this.antennaSpdLabel.Text = "...";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(538, 223);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(131, 16);
+            this.label21.TabIndex = 74;
+            this.label21.Text = "Antenna Spd Dev:";
+            // 
+            // responseHexLabel
+            // 
+            this.responseHexLabel.AutoSize = true;
+            this.responseHexLabel.Location = new System.Drawing.Point(368, 587);
+            this.responseHexLabel.MaximumSize = new System.Drawing.Size(350, 0);
+            this.responseHexLabel.Name = "responseHexLabel";
+            this.responseHexLabel.Size = new System.Drawing.Size(35, 13);
+            this.responseHexLabel.TabIndex = 80;
+            this.responseHexLabel.Text = "Hex...";
+            // 
+            // label3
+            // 
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label3.Location = new System.Drawing.Point(11, 175);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(125, 2);
+            this.label3.TabIndex = 81;
+            // 
+            // instrumentTypeLabel
+            // 
+            this.instrumentTypeLabel.AutoSize = true;
+            this.instrumentTypeLabel.Location = new System.Drawing.Point(12, 181);
+            this.instrumentTypeLabel.Name = "instrumentTypeLabel";
+            this.instrumentTypeLabel.Size = new System.Drawing.Size(105, 13);
+            this.instrumentTypeLabel.TabIndex = 82;
+            this.instrumentTypeLabel.Text = "Unknown Instrument";
+            // 
+            // arbSizeLabel
+            // 
+            this.arbSizeLabel.AutoSize = true;
+            this.arbSizeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.arbSizeLabel.Location = new System.Drawing.Point(698, 383);
+            this.arbSizeLabel.Name = "arbSizeLabel";
+            this.arbSizeLabel.Size = new System.Drawing.Size(19, 16);
+            this.arbSizeLabel.TabIndex = 84;
+            this.arbSizeLabel.Text = "...";
+            // 
+            // arbSize
+            // 
+            this.arbSize.AutoSize = true;
+            this.arbSize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.arbSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.arbSize.Location = new System.Drawing.Point(538, 383);
+            this.arbSize.Name = "arbSize";
+            this.arbSize.Size = new System.Drawing.Size(147, 16);
+            this.arbSize.TabIndex = 83;
+            this.arbSize.Text = "ARB Size/Deviation:";
+            // 
+            // mrbDeviationLabel
+            // 
+            this.mrbDeviationLabel.AutoSize = true;
+            this.mrbDeviationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mrbDeviationLabel.Location = new System.Drawing.Point(698, 315);
+            this.mrbDeviationLabel.Name = "mrbDeviationLabel";
+            this.mrbDeviationLabel.Size = new System.Drawing.Size(19, 16);
+            this.mrbDeviationLabel.TabIndex = 86;
+            this.mrbDeviationLabel.Text = "...";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(538, 315);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(114, 16);
+            this.label6.TabIndex = 85;
+            this.label6.Text = "MRB Deviation:";
+            // 
+            // mrbSpacingDevLabel
+            // 
+            this.mrbSpacingDevLabel.AutoSize = true;
+            this.mrbSpacingDevLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mrbSpacingDevLabel.Location = new System.Drawing.Point(698, 333);
+            this.mrbSpacingDevLabel.Name = "mrbSpacingDevLabel";
+            this.mrbSpacingDevLabel.Size = new System.Drawing.Size(19, 16);
+            this.mrbSpacingDevLabel.TabIndex = 88;
+            this.mrbSpacingDevLabel.Text = "...";
+            // 
+            // mrbSpacingDev
+            // 
+            this.mrbSpacingDev.AutoSize = true;
+            this.mrbSpacingDev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mrbSpacingDev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mrbSpacingDev.Location = new System.Drawing.Point(538, 333);
+            this.mrbSpacingDev.Name = "mrbSpacingDev";
+            this.mrbSpacingDev.Size = new System.Drawing.Size(137, 16);
+            this.mrbSpacingDev.TabIndex = 87;
+            this.mrbSpacingDev.Text = "MRB Spacing Dev:";
+            // 
+            // rfPortLabel
+            // 
+            this.rfPortLabel.AutoSize = true;
+            this.rfPortLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rfPortLabel.Location = new System.Drawing.Point(342, 191);
+            this.rfPortLabel.Name = "rfPortLabel";
+            this.rfPortLabel.Size = new System.Drawing.Size(19, 16);
+            this.rfPortLabel.TabIndex = 90;
+            this.rfPortLabel.Text = "...";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(182, 191);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(107, 16);
+            this.label8.TabIndex = 89;
+            this.label8.Text = "RF In/Out Port:";
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(82)))), ((int)(((byte)(84)))));
             this.ClientSize = new System.Drawing.Size(869, 642);
+            this.Controls.Add(this.rfPortLabel);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.mrbSpacingDevLabel);
+            this.Controls.Add(this.mrbSpacingDev);
+            this.Controls.Add(this.mrbDeviationLabel);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.arbSizeLabel);
+            this.Controls.Add(this.arbSize);
+            this.Controls.Add(this.instrumentTypeLabel);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.responseHexLabel);
+            this.Controls.Add(this.intExtBurstLabel);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.arbCountLabel);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.antennaSpdLabel);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.testStepStatus);
             this.Controls.Add(this.responseLabel);
@@ -991,6 +1199,23 @@
         private System.Windows.Forms.Label testStepStatus;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Timer progresTimer;
+        private System.Windows.Forms.Label intExtBurstLabel;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label arbCountLabel;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label antennaSpdLabel;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label responseHexLabel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label instrumentTypeLabel;
+        private System.Windows.Forms.Label arbSizeLabel;
+        private System.Windows.Forms.Label arbSize;
+        private System.Windows.Forms.Label mrbDeviationLabel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label mrbSpacingDevLabel;
+        private System.Windows.Forms.Label mrbSpacingDev;
+        private System.Windows.Forms.Label rfPortLabel;
+        private System.Windows.Forms.Label label8;
     }
 }
 
