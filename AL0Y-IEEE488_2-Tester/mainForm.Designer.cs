@@ -113,6 +113,11 @@
             this.mrbSpacingDev = new System.Windows.Forms.Label();
             this.rfPortLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.endBitWorker = new System.ComponentModel.BackgroundWorker();
+            this.getData = new System.Windows.Forms.Button();
+            this.readValuesWorker = new System.ComponentModel.BackgroundWorker();
+            this.resetInstWorker = new System.ComponentModel.BackgroundWorker();
+            this.repeatingDataWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // endBitBtn
@@ -122,18 +127,18 @@
             this.endBitBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.endBitBtn.Location = new System.Drawing.Point(12, 12);
             this.endBitBtn.Name = "endBitBtn";
-            this.endBitBtn.Size = new System.Drawing.Size(125, 35);
+            this.endBitBtn.Size = new System.Drawing.Size(151, 35);
             this.endBitBtn.TabIndex = 0;
-            this.endBitBtn.Text = "End BIT";
+            this.endBitBtn.Text = "End BIT and Read Values";
             this.endBitBtn.UseVisualStyleBackColor = false;
             this.endBitBtn.Click += new System.EventHandler(this.endBitBtn_Click);
             // 
             // runTestBtn
             // 
             this.runTestBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
-            this.runTestBtn.Location = new System.Drawing.Point(12, 53);
+            this.runTestBtn.Location = new System.Drawing.Point(12, 92);
             this.runTestBtn.Name = "runTestBtn";
-            this.runTestBtn.Size = new System.Drawing.Size(125, 35);
+            this.runTestBtn.Size = new System.Drawing.Size(151, 35);
             this.runTestBtn.TabIndex = 1;
             this.runTestBtn.Text = "Run Test";
             this.runTestBtn.UseVisualStyleBackColor = false;
@@ -142,9 +147,9 @@
             // endTestBtn
             // 
             this.endTestBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
-            this.endTestBtn.Location = new System.Drawing.Point(12, 94);
+            this.endTestBtn.Location = new System.Drawing.Point(12, 132);
             this.endTestBtn.Name = "endTestBtn";
-            this.endTestBtn.Size = new System.Drawing.Size(125, 35);
+            this.endTestBtn.Size = new System.Drawing.Size(151, 35);
             this.endTestBtn.TabIndex = 2;
             this.endTestBtn.Text = "Stop Test";
             this.endTestBtn.UseVisualStyleBackColor = false;
@@ -153,9 +158,9 @@
             // resetBtn
             // 
             this.resetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
-            this.resetBtn.Location = new System.Drawing.Point(12, 135);
+            this.resetBtn.Location = new System.Drawing.Point(12, 172);
             this.resetBtn.Name = "resetBtn";
-            this.resetBtn.Size = new System.Drawing.Size(125, 35);
+            this.resetBtn.Size = new System.Drawing.Size(151, 35);
             this.resetBtn.TabIndex = 3;
             this.resetBtn.Text = "Reset Instrument";
             this.resetBtn.UseVisualStyleBackColor = false;
@@ -900,15 +905,16 @@
             // label3
             // 
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label3.Location = new System.Drawing.Point(11, 175);
+            this.label3.Location = new System.Drawing.Point(13, 212);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 2);
+            this.label3.Size = new System.Drawing.Size(150, 2);
             this.label3.TabIndex = 81;
             // 
             // instrumentTypeLabel
             // 
             this.instrumentTypeLabel.AutoSize = true;
-            this.instrumentTypeLabel.Location = new System.Drawing.Point(12, 181);
+            this.instrumentTypeLabel.Location = new System.Drawing.Point(12, 219);
+            this.instrumentTypeLabel.MaximumSize = new System.Drawing.Size(150, 0);
             this.instrumentTypeLabel.Name = "instrumentTypeLabel";
             this.instrumentTypeLabel.Size = new System.Drawing.Size(105, 13);
             this.instrumentTypeLabel.TabIndex = 82;
@@ -998,12 +1004,42 @@
             this.label8.TabIndex = 89;
             this.label8.Text = "RF In/Out Port:";
             // 
+            // endBitWorker
+            // 
+            this.endBitWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.endBitWorker_DoWork);
+            // 
+            // getData
+            // 
+            this.getData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(60)))), ((int)(((byte)(55)))));
+            this.getData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.getData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.getData.Location = new System.Drawing.Point(12, 52);
+            this.getData.Name = "getData";
+            this.getData.Size = new System.Drawing.Size(151, 35);
+            this.getData.TabIndex = 91;
+            this.getData.Text = "Read Values";
+            this.getData.UseVisualStyleBackColor = false;
+            this.getData.Click += new System.EventHandler(this.getData_Click);
+            // 
+            // readValuesWorker
+            // 
+            this.readValuesWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.readValuesWorker_DoWork);
+            // 
+            // resetInstWorker
+            // 
+            this.resetInstWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.resetInstWorker_DoWork);
+            // 
+            // repeatingDataWorker
+            // 
+            this.repeatingDataWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.repeatingDataWorker_DoWork);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(82)))), ((int)(((byte)(84)))));
             this.ClientSize = new System.Drawing.Size(869, 642);
+            this.Controls.Add(this.getData);
             this.Controls.Add(this.rfPortLabel);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.mrbSpacingDevLabel);
@@ -1184,6 +1220,11 @@
         private System.Windows.Forms.Label mrbSpacingDev;
         private System.Windows.Forms.Label rfPortLabel;
         private System.Windows.Forms.Label label8;
+        private System.ComponentModel.BackgroundWorker endBitWorker;
+        private System.Windows.Forms.Button getData;
+        private System.ComponentModel.BackgroundWorker readValuesWorker;
+        private System.ComponentModel.BackgroundWorker resetInstWorker;
+        private System.ComponentModel.BackgroundWorker repeatingDataWorker;
     }
 }
 
