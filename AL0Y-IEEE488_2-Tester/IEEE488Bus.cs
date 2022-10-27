@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ivi.Visa;
-using alyBadawy;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AL0Y_IEEE488_2_Tester
 {
@@ -19,10 +13,11 @@ namespace AL0Y_IEEE488_2_Tester
         {
             IMessageBasedSession instrument;
             string busAddress = Properties.Settings.Default.busAddress;
-            string resourceName = "GPIB0::" + busAddress + "::INSTR";
+            string resourceName = $"GPIB0::{busAddress}::INSTR";
+
             instrument = GlobalResourceManager.Open(resourceName) as IMessageBasedSession;
-            instrument.TimeoutMilliseconds = 25;
-            instrument.TerminationCharacter = alyBadawy.HexParser.StringToByteArray("0A")[0];
+            instrument.TimeoutMilliseconds = Properties.Settings.Default.TimeoutMilliseconds;
+            instrument.TerminationCharacter = Properties.Settings.Default.terminatinByte;
             instrument.TerminationCharacterEnabled = true;
             return instrument;
         }
@@ -32,64 +27,17 @@ namespace AL0Y_IEEE488_2_Tester
             Thread.Sleep(Properties.Settings.Default.waitBeforeRead);
 
             IMessageBasedSession instrument = initializeInstrument();
-            string responseString = "";
-            string currentByte;
-            bool terminateReading;
-
-            do
-            {
-                currentByte = instrument.RawIO.ReadString(1);
-                var hexString =  HexParser.parse(currentByte);
-
-                terminateReading = (hexString == "0D" || responseString.Length > Properties.Settings.Default.maxResponseSize);
-                if (terminateReading)
-                {
-                    instrument.RawIO.ReadString(1);
-                }
-                else
-                {
-                    responseString += currentByte;
-                }
-
-            } while (!terminateReading);
-
-            return responseString;
-        }
-
-        internal static string readTillBufferEnd()
-        {
-            Thread.Sleep(Properties.Settings.Default.waitBeforeRead);
-
-            IMessageBasedSession instrument = initializeInstrument();
-            string responseString = "";
-            string currentByte;
-            try
-            {
-                while (true)
-                {
-                    currentByte = instrument.RawIO.ReadString(1);
-                    responseString += currentByte;
-
-                }
-            }
-            catch (Ivi.Visa.IOTimeoutException)
-            {
-                return responseString;
-            }
-        }
-
-        internal static string readTillTerminator()
-        {
-            Thread.Sleep(Properties.Settings.Default.waitBeforeRead);
-
-            IMessageBasedSession instrument = initializeInstrument();
             return instrument.RawIO.ReadString();
         }
 
         internal static void clearBuffer()
         {
-            readTillTerminator();
-            //readTillBufferEnd();
+            try
+            {
+                read();
+            }
+            catch (Ivi.Visa.IOTimeoutException)
+            { }
         }
 
         internal static void write(string command)
@@ -102,7 +50,7 @@ namespace AL0Y_IEEE488_2_Tester
         internal static string fetch(string command)
         {
             write(command);
-            return read();
+            return read().Trim();
         }
     }
 }

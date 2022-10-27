@@ -97,15 +97,12 @@
             this.separatorLine1 = new System.Windows.Forms.Label();
             this.responseLabel = new System.Windows.Forms.Label();
             this.testStepStatus = new System.Windows.Forms.Label();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.progresTimer = new System.Windows.Forms.Timer(this.components);
             this.intExtBurstLabel = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.arbCountLabel = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.antennaSpdLabel = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.responseHexLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.instrumentTypeLabel = new System.Windows.Forms.Label();
             this.arbSizeLabel = new System.Windows.Forms.Label();
@@ -837,20 +834,6 @@
             this.testStepStatus.TabIndex = 71;
             this.testStepStatus.Text = "Press SPACE to exit BIT mode";
             // 
-            // progressBar
-            // 
-            this.progressBar.ForeColor = System.Drawing.Color.LightGray;
-            this.progressBar.Location = new System.Drawing.Point(733, 620);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(124, 10);
-            this.progressBar.TabIndex = 72;
-            this.progressBar.Visible = false;
-            // 
-            // progresTimer
-            // 
-            this.progresTimer.Interval = 25;
-            this.progresTimer.Tick += new System.EventHandler(this.progresTimer_Tick);
-            // 
             // intExtBurstLabel
             // 
             this.intExtBurstLabel.AutoSize = true;
@@ -913,16 +896,6 @@
             this.label21.Size = new System.Drawing.Size(131, 16);
             this.label21.TabIndex = 74;
             this.label21.Text = "Antenna Spd Dev:";
-            // 
-            // responseHexLabel
-            // 
-            this.responseHexLabel.AutoSize = true;
-            this.responseHexLabel.Location = new System.Drawing.Point(368, 587);
-            this.responseHexLabel.MaximumSize = new System.Drawing.Size(350, 0);
-            this.responseHexLabel.Name = "responseHexLabel";
-            this.responseHexLabel.Size = new System.Drawing.Size(35, 13);
-            this.responseHexLabel.TabIndex = 80;
-            this.responseHexLabel.Text = "Hex...";
             // 
             // label3
             // 
@@ -1041,14 +1014,12 @@
             this.Controls.Add(this.arbSize);
             this.Controls.Add(this.instrumentTypeLabel);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.responseHexLabel);
             this.Controls.Add(this.intExtBurstLabel);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.arbCountLabel);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.antennaSpdLabel);
             this.Controls.Add(this.label21);
-            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.testStepStatus);
             this.Controls.Add(this.responseLabel);
             this.Controls.Add(this.separatorLine1);
@@ -1197,15 +1168,12 @@
         private System.Windows.Forms.Label separatorLine1;
         private System.Windows.Forms.Label responseLabel;
         private System.Windows.Forms.Label testStepStatus;
-        private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Timer progresTimer;
         private System.Windows.Forms.Label intExtBurstLabel;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label arbCountLabel;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label antennaSpdLabel;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label responseHexLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label instrumentTypeLabel;
         private System.Windows.Forms.Label arbSizeLabel;

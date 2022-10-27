@@ -34,7 +34,7 @@ namespace AL0Y_IEEE488_2_Tester.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int waitBeforeWrite {
             get {
                 return ((int)(this["waitBeforeWrite"]));
@@ -43,7 +43,7 @@ namespace AL0Y_IEEE488_2_Tester.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
         public int waitBeforeRead {
             get {
                 return ((int)(this["waitBeforeRead"]));
@@ -56,6 +56,24 @@ namespace AL0Y_IEEE488_2_Tester.Properties {
         public int maxResponseSize {
             get {
                 return ((int)(this["maxResponseSize"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public byte terminatinByte {
+            get {
+                return ((byte)(this["terminatinByte"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int TimeoutMilliseconds {
+            get {
+                return ((int)(this["TimeoutMilliseconds"]));
             }
         }
     }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
-using alyBadawy;
 
 namespace AL0Y_IEEE488_2_Tester
 {
@@ -26,8 +25,7 @@ namespace AL0Y_IEEE488_2_Tester
                 responseLabel.Text = "(3/4) Getting instrument Type";
                 instType = IEEE488Bus.fetch("GETCFG ");
                 instrumentTypeLabel.Text = instType;
-                responseHexLabel.Text = HexParser.parse(instType);
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
                 responseLabel.Text = "(3/4) Getting initial data...";
                 getInitialData();
                 responseLabel.Text = "Ready...";
@@ -43,11 +41,9 @@ namespace AL0Y_IEEE488_2_Tester
         {
             try
             {
-                progressBar.Visible = true;
-                progresTimer.Start();
-                progresTimer.Enabled = true;
-                IEEE488Bus.write("SETBRRT500  ");
-                IEEE488Bus.write("SETTGTR5  ");
+                IEEE488Bus.write("SETBRRT5  ");
+                IEEE488Bus.write("SETTGTR1500  ");
+                IEEE488Bus.clearBuffer();
                 testTimer.Start();
                 testTimer.Enabled = true;
             }
@@ -61,13 +57,16 @@ namespace AL0Y_IEEE488_2_Tester
         {
             try
             {
-                IEEE488Bus.write("SETBRRT500  ");
-                IEEE488Bus.write("SETTGTR1  ");
+                IEEE488Bus.write("SETBRRT0  ");
+                IEEE488Bus.write("SETTGTR0  ");
+                IEEE488Bus.clearBuffer();
+
                 testTimer.Stop();
                 testTimer.Enabled = false;
-                progresTimer.Stop();
-                progresTimer.Enabled = false;
-                progressBar.Visible = false;
+
+                getRepeatingData();
+
+
             }
             catch (Exception ex)
             {
@@ -83,7 +82,6 @@ namespace AL0Y_IEEE488_2_Tester
             try
             {
                 IEEE488Bus.write("RSTDME:CH0");
-                IEEE488Bus.clearBuffer();
                 endBitBtn.Enabled = true;
                 responseLabel.Text = "Ready...";
             }
@@ -109,6 +107,7 @@ namespace AL0Y_IEEE488_2_Tester
 
         internal void getRepeatingData()
         {
+
             rangeLabel.Text = IEEE488Bus.fetch("FTHTGTD");
             rangeRateLabel.Text = IEEE488Bus.fetch("FTHTGTR");
             bearingLabel.Text = IEEE488Bus.fetch("FTHBRNG");
@@ -129,10 +128,12 @@ namespace AL0Y_IEEE488_2_Tester
             if (idToneLabel.Text == "F") idToneLabel.Text = "Off";
 
             string channel = IEEE488Bus.fetch("FTHCHNL");
+            channel = channel.Substring(0, channel.Length - 1);
             string mode = IEEE488Bus.fetch("FTHXYMD");
+            mode = mode.Substring(1, mode.Length - 1);
             channleLabel.Text = $"{channel}({mode})";
 
-            freqLabel.Text = IEEE488Bus.fetch("FTHFREQ");
+            freqLabel.Text = IEEE488Bus.fetch("FTHFREQ").ToString();
 
             presetStatusLabel.Text = IEEE488Bus.fetch("FTHPRST");
             if (presetStatusLabel.Text == "Y") presetStatusLabel.Text = "Yes";
@@ -148,7 +149,9 @@ namespace AL0Y_IEEE488_2_Tester
             //// UUT Data
             peakPowerLabel.Text = IEEE488Bus.fetch("FTHPWER");
 
-            aaReplyEffLabel1.Text = IEEE488Bus.fetch("FTHUUTR");
+            aaReplyEffLabel1.Text = "N/A";
+            aaReplyEffLabel2.Text = "N/A";
+            aaIntLabel.Text = "N/A";
 
             // Missing command for A/A Reply EFF. (%)
 
@@ -172,9 +175,15 @@ namespace AL0Y_IEEE488_2_Tester
             b15ModLabel.Text = IEEE488Bus.fetch("FTHMD15");
             b135ModLabel.Text = IEEE488Bus.fetch("FTHM135");
             mrbStatusLabel.Text = IEEE488Bus.fetch("FTHMRBS");
+            if (mrbStatusLabel.Text == "O") mrbStatusLabel.Text = "On";
+            if (mrbStatusLabel.Text == "F") mrbStatusLabel.Text = "Off";
             arbStatusLabel.Text = IEEE488Bus.fetch("FTHARBS");
+            if (arbStatusLabel.Text == "O") arbStatusLabel.Text = "On";
+            if (arbStatusLabel.Text == "F") arbStatusLabel.Text = "Off";
             squitterRateLabel.Text = IEEE488Bus.fetch("FTHSQTR");
             // Missing command for Active Step Size.
+
+            activeStepLabel.Text = "+1";
 
 
             // Flight Inspection Unit
@@ -187,8 +196,8 @@ namespace AL0Y_IEEE488_2_Tester
                 arbCountLabel.Text = IEEE488Bus.fetch("FTHARBC");
                 arbSizeLabel.Text = IEEE488Bus.fetch("FTHARBF");
                 intExtBurstLabel.Text = IEEE488Bus.fetch("FTHBRST");
-                if (intExtBurstLabel.Text == "I") intExtBurstLabel.Text = "Int.";
-                if (intExtBurstLabel.Text == "E") intExtBurstLabel.Text = "Ext.";
+                if (intExtBurstLabel.Text == " I") intExtBurstLabel.Text = "Int.";
+                if (intExtBurstLabel.Text == " E") intExtBurstLabel.Text = "Ext.";
             }
         }
 
@@ -196,9 +205,6 @@ namespace AL0Y_IEEE488_2_Tester
         {
             testTimer.Stop();
             testTimer.Enabled = false;
-            progressBar.Visible = false;
-            progresTimer.Stop();
-            progresTimer.Enabled = false;
             responseLabel.Text = $"Error: {ex.Message}";
 
         }
@@ -258,26 +264,11 @@ namespace AL0Y_IEEE488_2_Tester
             {
                 string response = IEEE488Bus.fetch(commandTextBox.Text.ToUpper());
                 responseLabel.Text = response;
-                responseHexLabel.Text = HexParser.parse(response);
             }
             catch (Exception ex)
             {
                 responseLabel.Text = $"Error: {ex.Message}";
             }
-        }
-
-        private void progresTimer_Tick(object sender, EventArgs e)
-        {
-            progressBar.Value += 20;
-            if (progressBar.Value > 100)
-            {
-                progressBar.Value = 0;
-            }
-        }
-
-        private void mainForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
